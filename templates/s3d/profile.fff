@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<profile name="{{profile.name}} Test" version="{{profile.version}}" app="S3D-Software 3.1.1">
+    <baseProfile></baseProfile>
+    <printMaterial></printMaterial>
+    <printQuality>{{profile.primary_extruder.side_name}} Extruder - Standard</printQuality>
+    <printExtruders>{{profile.primary_extruder.side_name}} Extruder Only</printExtruders>
+    {% for extruder in profile.active_extruders %}
+    {% include "s3d/extruder.xml" %}
+
+    {% endfor %}
+    <primaryExtruder>0</primaryExtruder>
+    <layerHeight>0.2</layerHeight>
+    <topSolidLayers>4</topSolidLayers>
+    <bottomSolidLayers>4</bottomSolidLayers>
+    <perimeterOutlines>3</perimeterOutlines>
+    <printPerimetersInsideOut>1</printPerimetersInsideOut>
+    <startPointOption>3</startPointOption>
+    <startPointOriginX>105</startPointOriginX>
+    <startPointOriginY>300</startPointOriginY>
+    <startPointOriginZ>300</startPointOriginZ>
+    <sequentialIslands>0</sequentialIslands>
+    <spiralVaseMode>0</spiralVaseMode>
+    <firstLayerHeightPercentage>125</firstLayerHeightPercentage>
+    <firstLayerWidthPercentage>100</firstLayerWidthPercentage>
+    <firstLayerUnderspeed>0.85</firstLayerUnderspeed>
+    <useRaft>0</useRaft>
+    <raftExtruder>0</raftExtruder>
+    <raftLayers>2</raftLayers>
+    <raftOffset>3</raftOffset>
+    <raftSeparationDistance>0.1</raftSeparationDistance>
+    <raftInfill>85</raftInfill>
+    <disableRaftBaseLayers>0</disableRaftBaseLayers>
+    <useSkirt>1</useSkirt>
+    <skirtExtruder>999</skirtExtruder>
+    <skirtLayers>1</skirtLayers>
+    <skirtOutlines>2</skirtOutlines>
+    <skirtOffset>4</skirtOffset>
+    <usePrimePillar>0</usePrimePillar>
+    <primePillarExtruder>999</primePillarExtruder>
+    <primePillarWidth>15</primePillarWidth>
+    <primePillarLocation>7</primePillarLocation>
+    <primePillarSpeedMultiplier>1</primePillarSpeedMultiplier>
+    <useOozeShield>0</useOozeShield>
+    <oozeShieldExtruder>999</oozeShieldExtruder>
+    <oozeShieldOffset>2</oozeShieldOffset>
+    <oozeShieldOutlines>1</oozeShieldOutlines>
+    <oozeShieldSidewallShape>1</oozeShieldSidewallShape>
+    <oozeShieldSidewallAngle>30</oozeShieldSidewallAngle>
+    <oozeShieldSpeedMultiplier>1</oozeShieldSpeedMultiplier>
+    <infillExtruder>1</infillExtruder>
+    <internalInfillPattern>Grid</internalInfillPattern>
+    <externalInfillPattern>Rectilinear</externalInfillPattern>
+    <infillPercentage>20</infillPercentage>
+    <outlineOverlapPercentage>25</outlineOverlapPercentage>
+    <infillExtrusionWidthPercentage>100</infillExtrusionWidthPercentage>
+    <minInfillLength>3</minInfillLength>
+    <infillLayerInterval>1</infillLayerInterval>
+    <infillAngles>45,-45</infillAngles>
+    <overlapInfillAngles>1</overlapInfillAngles>
+    <generateSupport>0</generateSupport>
+    <supportExtruder>0</supportExtruder>
+    <supportInfillPercentage>25</supportInfillPercentage>
+    <supportExtraInflation>1</supportExtraInflation>
+    <denseSupportLayers>5</denseSupportLayers>
+    <denseSupportInfillPercentage>75</denseSupportInfillPercentage>
+    <supportLayerInterval>1</supportLayerInterval>
+
+    <supportHorizontalPartOffset>0.7</supportHorizontalPartOffset>
+    <supportUpperSeparationLayers>1</supportUpperSeparationLayers>
+    <supportLowerSeparationLayers>1</supportLowerSeparationLayers>
+
+    <supportType>0</supportType>
+    <supportGridSpacing>1</supportGridSpacing>
+    <maxOverhangAngle>60</maxOverhangAngle>
+    <supportAngles>90</supportAngles>
+    {% for extruder in profile.active_extruders %}
+        {% with name = extruder.name, temperature = extruder.filament.print_temperature_range[0], is_heated_bed = False, temperature_number=extruder.toolhead_number %}
+            {% include "s3d/temperatureController.tpl" %}
+
+        {% endwith %}
+    {% endfor %}
+    {% with name = "Heated Bed", temperature = profile.bed_temperature, is_heated_bed = True %}
+    {% include "s3d/temperatureController.tpl" %}
+    {% endwith %}
+
+    <fanSpeed>
+        <setpoint layer="1" speed="0" />
+        <setpoint layer="2" speed="100"/>
+    </fanSpeed>
+    <blipFanToFullPower>0</blipFanToFullPower>
+    <adjustSpeedForCooling>1</adjustSpeedForCooling>
+    <minSpeedLayerTime>5</minSpeedLayerTime>
+    <minCoolingSpeedSlowdown>75</minCoolingSpeedSlowdown>
+    <increaseFanForCooling>1</increaseFanForCooling>
+    <minFanLayerTime>5</minFanLayerTime>
+    <maxCoolingFanSpeed>100</maxCoolingFanSpeed>
+    <increaseFanForBridging>1</increaseFanForBridging>
+    <bridgingFanSpeed>100</bridgingFanSpeed>
+    <use5D>1</use5D>
+    <relativeEdistances>0</relativeEdistances>
+    <allowEaxisZeroing>1</allowEaxisZeroing>
+    <independentExtruderAxes>0</independentExtruderAxes>
+    <includeM10123>0</includeM10123>
+    <stickySupport>1</stickySupport>
+    <applyToolheadOffsets>0</applyToolheadOffsets>
+    <gcodeXoffset>0</gcodeXoffset>
+    <gcodeYoffset>0</gcodeYoffset>
+    <gcodeZoffset>0</gcodeZoffset>
+    <overrideMachineDefinition>1</overrideMachineDefinition>
+    <machineTypeOverride>0</machineTypeOverride>
+    <strokeXoverride>210</strokeXoverride>
+    <strokeYoverride>297</strokeYoverride>
+    <strokeZoverride>210</strokeZoverride>
+    <originOffsetXoverride>0</originOffsetXoverride>
+    <originOffsetYoverride>0</originOffsetYoverride>
+    <originOffsetZoverride>0</originOffsetZoverride>
+    <homeXdirOverride>-1</homeXdirOverride>
+    <homeYdirOverride>-1</homeYdirOverride>
+    <homeZdirOverride>-1</homeZdirOverride>
+    <flipXoverride>1</flipXoverride>
+    <flipYoverride>-1</flipYoverride>
+    <flipZoverride>1</flipZoverride>
+    <toolheadOffsets>0,0|0,0|0,0|0,0|0,0|0,0</toolheadOffsets>
+    <overrideFirmwareConfiguration>1</overrideFirmwareConfiguration>
+    <firmwareTypeOverride>RepRap (Marlin/Repetier/Sprinter)</firmwareTypeOverride>
+    <GPXconfigOverride>r2</GPXconfigOverride>
+    <baudRateOverride>250000</baudRateOverride>
+    <overridePrinterModels>0</overridePrinterModels>
+    <printerModelsOverride></printerModelsOverride>
+    <startingGcode></startingGcode>
+    <layerChangeGcode></layerChangeGcode>
+    <retractionGcode></retractionGcode>
+    <toolChangeGcode></toolChangeGcode>
+    <endingGcode>{% include "s3d/ending.gcode.tpl" %}</endingGcode>
+    <exportFileFormat>gcode</exportFileFormat>
+    <celebration>0</celebration>
+    <celebrationSong></celebrationSong>
+    <postProcessing></postProcessing>
+    <defaultSpeed>2400</defaultSpeed>
+    <outlineUnderspeed>0.85</outlineUnderspeed>
+    <solidInfillUnderspeed>0.85</solidInfillUnderspeed>
+    <supportUnderspeed>0.9</supportUnderspeed>
+    <rapidXYspeed>12000</rapidXYspeed>
+    <rapidZspeed>1002</rapidZspeed>
+    <minBridgingArea>10</minBridgingArea>
+    <bridgingExtraInflation>0</bridgingExtraInflation>
+    <bridgingExtrusionMultiplier>1</bridgingExtrusionMultiplier>
+    <bridgingSpeedMultiplier>1.5</bridgingSpeedMultiplier>
+    <filamentDiameter>2.85</filamentDiameter>
+    <filamentPricePerKg>19.95</filamentPricePerKg>
+    <filamentDensity>1.25</filamentDensity>
+    <useMinPrintHeight>0</useMinPrintHeight>
+    <minPrintHeight>0</minPrintHeight>
+    <useMaxPrintHeight>0</useMaxPrintHeight>
+    <maxPrintHeight>0</maxPrintHeight>
+    <useDiaphragm>0</useDiaphragm>
+    <diaphragmLayerInterval>5</diaphragmLayerInterval>
+    <robustSlicing>1</robustSlicing>
+    <mergeAllIntoSolid>0</mergeAllIntoSolid>
+    <onlyRetractWhenCrossingOutline>0</onlyRetractWhenCrossingOutline>
+    <retractBetweenLayers>1</retractBetweenLayers>
+    <useRetractionMinTravel>1</useRetractionMinTravel>
+    <retractionMinTravel>1.5</retractionMinTravel>
+    <retractWhileWiping>1</retractWhileWiping>
+    <onlyWipeOutlines>1</onlyWipeOutlines>
+    <avoidCrossingOutline>1</avoidCrossingOutline>
+    <maxMovementDetourFactor>3</maxMovementDetourFactor>
+    <toolChangeRetractionDistance>8</toolChangeRetractionDistance>
+    <toolChangeExtraRestartDistance>0</toolChangeExtraRestartDistance>
+    <toolChangeRetractionSpeed>2400</toolChangeRetractionSpeed>
+    <allowThinWallGapFill>1</allowThinWallGapFill>
+    <thinWallAllowedOverlapPercentage>10</thinWallAllowedOverlapPercentage>
+    <horizontalSizeCompensation>-0.1</horizontalSizeCompensation>
+
+    {% for quality_preset in profile.quality_presets %}
+    {% macro render_quality_preset() %}{% include "s3d/qualityPreset.tpl" %}{% endmacro %}
+    {{ render_quality_preset()|indent }}
+
+    {% endfor %}
+
+    {% if profile.left_extruder %}
+    {% with name="Left Extruder Only", extruders=[profile.left_extruder] %}
+    {% include "s3d/autoConfigureExtruders.tpl" %}
+    {% endwith %}
+    {% endif %}
+
+    {% if profile.right_extruder %}
+    {% with name="Right Extruder Only", extruders=[profile.right_extruder] %}
+    {% include "s3d/autoConfigureExtruders.tpl" %}
+    {% endwith %}
+    {% endif %}
+
+    {% if profile.left_extruder and profile.right_extruder %}
+    {% with name="Both Extruders", extruders=[profile.left_extruder, profile.right_extruder] %}
+    {% include "s3d/autoConfigureExtruders.tpl" %}
+    {% endwith %}
+    {% endif %}
+</profile>

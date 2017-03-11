@@ -1,0 +1,16 @@
+    <extruder name="{{extruder.name}}">
+        <toolheadNumber>{{extruder.toolhead_number}}</toolheadNumber>
+        <diameter>{{extruder.nozzle_size}}</diameter>
+        <autoWidth>0</autoWidth>
+        <width>{{extruder.nozzle_size}}</width>
+        <extrusionMultiplier>{{extruder.filament.extrusion_multiplier}}</extrusionMultiplier>
+        <useRetract>1</useRetract>
+        <retractionDistance>{{extruder.filament.retraction_distance}}</retractionDistance>
+        <extraRestartDistance>0</extraRestartDistance>
+        <retractionZLift>{{retraction_lift|default(0.05)|round(2)}}</retractionZLift>
+        <retractionSpeed>{{extruder.filament.retraction_speed * 60}}</retractionSpeed>
+        <useCoasting>0</useCoasting>
+        <coastingDistance>{{extruder.coasting_distance|round(2)}}</coastingDistance>
+        <useWipe>0</useWipe>
+        <wipeDistance>{{extruder.nozzle_size * 12.5}}</wipeDistance>
+    </extruder>
